@@ -1,0 +1,67 @@
+GIT
+  remote: git@github.com:queue-bus/queue-bus
+  revision: 76bc15cf0e2c53f3b199f921a54802ee62d8b354
+  branch: choubacha/adds-middleware
+  specs:
+    queue-bus (0.5.9)
+      multi_json
+      redis
+
+PATH
+  remote: .
+  specs:
+    datadog_queue_bus (0.1.0)
+      ddtrace (~> 0.25)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.0)
+    ddtrace (0.25.0)
+      msgpack
+    diff-lcs (1.3)
+    jaro_winkler (1.5.3)
+    msgpack (1.3.0)
+    multi_json (1.13.1)
+    parallel (1.17.0)
+    parser (2.6.3.0)
+      ast (~> 2.4.0)
+    rainbow (3.0.0)
+    rake (10.5.0)
+    redis (4.1.2)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.2)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.2)
+    rubocop (0.72.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.6)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    ruby-progressbar (1.10.1)
+    unicode-display_width (1.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.17)
+  datadog_queue_bus!
+  queue-bus (~> 0.5)!
+  rake (~> 10.0)
+  rspec (~> 3.0)
+  rubocop
+
+BUNDLED WITH
+   1.17.1

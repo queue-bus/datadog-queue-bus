@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'datadog_queue_bus/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'datadog_queue_bus'
+  spec.name          = 'datadog-queue-bus'
   spec.version       = DatadogQueueBus::VERSION
   spec.authors       = ['kbacha']
   spec.email         = ['chewbacha@gmail.com']

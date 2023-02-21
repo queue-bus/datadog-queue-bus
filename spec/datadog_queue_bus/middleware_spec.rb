@@ -11,9 +11,10 @@ RSpec.describe DatadogQueueBus::Middleware do
       'bus_class_proxy' => 'QueueBus::Driver'
     }
   end
+  let(:tracer) { Datadog::Tracing }
 
   it 'uses the class_proxy_class as the resource name' do
-    expect(Datadog.tracer)
+    expect(tracer)
       .to receive(:trace)
       .with('queue-bus.worker', hash_including(resource: 'QueueBus::Driver'))
     subject.call(attrs)
@@ -27,7 +28,7 @@ RSpec.describe DatadogQueueBus::Middleware do
     end
 
     it 'sends the service name' do
-      expect(Datadog.tracer)
+      expect(tracer)
         .to receive(:trace)
         .with('queue-bus.worker', hash_including(service: name))
       subject.call(attrs)
@@ -40,7 +41,7 @@ RSpec.describe DatadogQueueBus::Middleware do
     end
 
     it 'includes the event in the resource' do
-      expect(Datadog.tracer)
+      expect(tracer)
         .to receive(:trace)
         .with('queue-bus.worker',
               hash_including(resource: a_string_matching(/event=my_event/)))
@@ -54,7 +55,7 @@ RSpec.describe DatadogQueueBus::Middleware do
     end
 
     it 'includes the sub key in the resource name' do
-      expect(Datadog.tracer)
+      expect(tracer)
         .to receive(:trace)
         .with('queue-bus.worker',
               hash_including(resource: a_string_matching(/sub=my_subscription/)))
@@ -69,7 +70,7 @@ RSpec.describe DatadogQueueBus::Middleware do
 
     it 'includes all attributes that start with bus_' do
       span = spy('span')
-      expect(Datadog.tracer).to receive(:trace).and_yield(span)
+      expect(tracer).to receive(:trace).and_yield(span)
       subject.call(attrs)
       expect(span).to have_received(:set_tag).with('queue-bus.bus_class_proxy', 'QueueBus::Driver')
       expect(span).to have_received(:set_tag).with('queue-bus.bus_field', 'my_field')
@@ -83,7 +84,7 @@ RSpec.describe DatadogQueueBus::Middleware do
 
     it 'includes all attributes that start with bus_' do
       span = spy('span')
-      expect(Datadog.tracer).to receive(:trace).and_yield(span)
+      expect(tracer).to receive(:trace).and_yield(span)
       subject.call(attrs)
       expect(span).to have_received(:set_tag).with('queue-bus.bus_class_proxy', 'QueueBus::Driver')
       expect(span).not_to have_received(:set_tag).with('queue-bus.user_id', 1234)

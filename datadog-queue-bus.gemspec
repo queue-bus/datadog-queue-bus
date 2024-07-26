@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'ddtrace', '~> 1.0'
+  spec.add_dependency 'datadog', '~> 2.0'
   spec.add_dependency 'queue-bus', '~> 0.6'
 
   spec.add_development_dependency 'bundler', '~> 2.4'

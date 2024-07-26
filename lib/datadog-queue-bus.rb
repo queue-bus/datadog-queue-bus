@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ddtrace'
+require 'datadog'
 require 'queue-bus'
 require 'datadog_queue_bus/version'
 require 'datadog_queue_bus/middleware'

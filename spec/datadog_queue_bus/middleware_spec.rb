@@ -20,11 +20,27 @@ RSpec.describe DatadogQueueBus::Middleware do
     subject.call(attrs)
   end
 
-  context 'with a service name' do
+  context 'with a static service name' do
     let(:name) { rand.to_s }
 
     before do
       DatadogQueueBus.service_name = name
+    end
+
+    it 'sends the service name' do
+      expect(tracer)
+        .to receive(:trace)
+        .with('queue-bus.worker', hash_including(service: name))
+      subject.call(attrs)
+    end
+  end
+
+  context 'with a dynamic service name' do
+    let(:name) { rand.to_s }
+    let(:service_name) { ->(attrs) { name } }
+
+    before do
+      DatadogQueueBus.service_name = service_name
     end
 
     it 'sends the service name' do

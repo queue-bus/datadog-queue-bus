@@ -32,6 +32,18 @@ To override the default service name (which will be `queue-bus` if not set):
 DatadogQueueBus.service_name = 'my-queue-bus-service'
 ```
 
+You can also set the service name to a Callable that accepts the attributes hash and returns a String, granting you flexibility to monitor larger installations as separate services:
+
+```ruby
+DatadogQueueBus.service_name = ->(attrs) do
+    if attrs['bus_rider_app_key'].nil? || attrs['bus_rider_app_key'].empty?
+      'default-queue-bus-service'
+    else
+        "#{attrs['bus_rider_app_key']}-queue-bus-service"
+    end
+ end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

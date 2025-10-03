@@ -9,6 +9,7 @@ require 'datadog_queue_bus/middleware'
 module DatadogQueueBus
   class << self
     # Sets the service_name that will be used when reporting queue-bus spans.
+    # Set this to a String, or to a Callable that accepts an attributes hash and returns a String.
     attr_writer :service_name
 
     # Returns the service name that is used when reporting queue-bus spans.

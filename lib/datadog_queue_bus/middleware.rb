@@ -13,9 +13,15 @@ module DatadogQueueBus
       resource += " event=#{event_type}" if event_type
       resource += " sub=#{sub_key}" if sub_key
 
+      service_name = if DatadogQueueBus.service_name.respond_to?(:call)
+                      DatadogQueueBus.service_name.call(attrs)
+                    else
+                      DatadogQueueBus.service_name
+                    end
+
       # def trace(name, continue_from: nil, **span_options, &block)
       Datadog::Tracing.trace('queue-bus.worker',
-                             service: DatadogQueueBus.service_name,
+                             service: service_name,
                              resource: resource) do |span|
         attrs.keys.grep(/^bus_/).each do |key|
           span.set_tag("queue-bus.#{key}", attrs[key])
